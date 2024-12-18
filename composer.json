@@ -1,0 +1,27 @@
+{
+    "name": "ihor/ass",
+    "description": "ihor/ass",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "IhorAss\\IhorAssPlugin",
+        "label": {
+            "de-DE": "Entity Associations Plugin",
+            "en-GB": "Entity Associations Plugin"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "IhorAss\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IhorAss\\Tests\\": "tests/"
+        }
+    }
+}
