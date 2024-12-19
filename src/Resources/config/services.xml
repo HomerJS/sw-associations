@@ -12,5 +12,19 @@
         <service id="IhorAss\Core\Content\Simple\Aggregate\SimpleTranslation\SimpleTranslationEntity">
             <tag name="shopware.entity" />
         </service>
+
+        <service id="IhorAss\Core\Content\Simple2\Simple2Entity">
+            <tag name="shopware.entity" />
+        </service>
+
+        <service id="IhorAss\Core\Content\Simple2\Aggregate\Simple2Translation\Simple2TranslationEntity">
+            <tag name="shopware.entity" />
+        </service>
+
+        <service id="IhorAss\Command\TestCommand">
+            <tag name="console.command" />
+            <argument type="service" id="simple_entity.repository" />
+            <argument type="service" id="simple2_entity.repository" />
+        </service>
     </services>
 </container>

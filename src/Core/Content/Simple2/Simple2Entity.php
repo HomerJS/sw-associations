@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace IhorAss\Core\Content\Simple;
+namespace IhorAss\Core\Content\Simple2;
 
-use IhorAss\Core\Content\Simple2\Simple2Entity;
+use IhorAss\Core\Content\Simple\SimpleEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Attribute\Field;
 use Shopware\Core\Framework\DataAbstractionLayer\Attribute\FieldType;
 use Shopware\Core\Framework\DataAbstractionLayer\Attribute\ForeignKey;
@@ -15,8 +15,8 @@ use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\Attribute\Entity as EntityAttribute;
 use Shopware\Core\Framework\Struct\ArrayEntity;
 
-#[EntityAttribute('simple_entity')]
-class SimpleEntity extends Entity
+#[EntityAttribute('simple2_entity')]
+class Simple2Entity extends Entity
 {
     // dal:create:schema
 
@@ -26,7 +26,7 @@ class SimpleEntity extends Entity
 
     #[Required]
     #[Field(type: FieldType::STRING, translated: true)]
-    public ?string $simpleName = null;
+    public ?string $simple2Name = null;
 
     /**
      * @var array<string, ArrayEntity>|null
@@ -34,9 +34,9 @@ class SimpleEntity extends Entity
     #[Translations]
     public ?array $translations = null;
 
-    #[ForeignKey(entity: 'simple2_entity')]
-    public ?string $simple2EntityId = null;
+    #[ForeignKey(entity: 'simple_entity')]
+    public ?string $simpleEntityId = null;
 
-    #[OneToOne(entity: 'simple2_entity', onDelete: OnDelete::CASCADE)]
-    public ?Simple2Entity $simple2Entity = null;
+    #[OneToOne(entity: 'simple_entity', onDelete: OnDelete::CASCADE)]
+    public ?SimpleEntity $simpleEntity = null;
 }

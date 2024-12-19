@@ -5,11 +5,11 @@ namespace IhorAss\Migration;
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Migration\MigrationStep;
 
-class Migration1734550635SimpleEntity extends MigrationStep
+class Migration1734633295 extends MigrationStep
 {
     public function getCreationTimestamp(): int
     {
-        return 1734550635;
+        return 1734633295;
     }
 
     public function update(Connection $connection): void
@@ -18,15 +18,10 @@ class Migration1734550635SimpleEntity extends MigrationStep
         $this->createTranslation($connection);
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-        // Add destructive update if necessary
-    }
-
     private function createEntity(Connection $connection): void
     {
         $query = <<<'SQL'
-           CREATE TABLE `simple_entity` (
+            CREATE TABLE `simple2_entity` (
                 `id` BINARY(16) NOT NULL,
                 `created_at` DATETIME(3) NOT NULL,
                 `updated_at` DATETIME(3) NULL,
@@ -39,17 +34,17 @@ SQL;
     private function createTranslation(Connection $connection): void
     {
         $query = <<<'SQL'
-        CREATE TABLE `simple_entity_translation` (
-                `simple_entity_id` BINARY(16) NOT NULL,
-                `simple_name` VARCHAR(255) NOT NULL,
+            CREATE TABLE `simple2_entity_translation` (
+                `simple2_entity_id` BINARY(16) NOT NULL,
+                `language_id` BINARY(16) NOT NULL,
+                `simple2_name` VARCHAR(255) NOT NULL,
                 `created_at` DATETIME(3) NOT NULL,
                 `updated_at` DATETIME(3) NULL,
-                `language_id` BINARY(16) NOT NULL,
-                PRIMARY KEY (`simple_entity_id`,`language_id`),
-                KEY `fk.simple_entity_translation.simple_entity_id` (`simple_entity_id`),
-                KEY `fk.simple_entity_translation.language_id` (`language_id`),
-                CONSTRAINT `fk.simple_entity_translation.simple_entity_id` FOREIGN KEY (`simple_entity_id`) REFERENCES `simple_entity` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-                CONSTRAINT `fk.simple_entity_translation.language_id` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+                PRIMARY KEY (`simple2_entity_id`,`language_id`),
+                KEY `fk.simple2_entity_translation.simple2_entity_id` (`simple2_entity_id`),
+                KEY `fk.simple2_entity_translation.language_id` (`language_id`),
+                CONSTRAINT `fk.simple2_entity_translation.simple2_entity_id` FOREIGN KEY (`simple2_entity_id`) REFERENCES `simple2_entity` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+                CONSTRAINT `fk.simple2_entity_translation.language_id` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 SQL;
         $connection->executeStatement($query);
