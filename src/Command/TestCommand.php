@@ -25,17 +25,21 @@ class TestCommand extends Command
     {
         $context = Context::createCLIContext();
 
+//        $simple2IdList = $this->s2Repository->create([
+//            [
+//                'id' => Uuid::randomHex(),
+//                'simple2Name' => 'some name',
+//            ]
+//        ], $context);
+//
+//        $pk = $simple2IdList->getPrimaryKeys('simple2_entity');
+//        $simple2Id = $pk[0];
+//var_dump($simple2Id);
         $this->sRepository->create([
             [
                 'id' => Uuid::randomHex(),
-                'simpleName' => 'some name',
-            ]
-        ], $context);
-
-        $this->s2Repository->create([
-            [
-                'id' => Uuid::randomHex(),
-                'simple2Name' => 'some2 name',
+                'simpleName' => 'some2 name',
+                'simple2EntityId' => '0193e08ca08b71c484e8290885464aa9'
             ]
         ], $context);
 

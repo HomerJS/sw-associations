@@ -33,10 +33,4 @@ class Simple2Entity extends Entity
      */
     #[Translations]
     public ?array $translations = null;
-
-    #[ForeignKey(entity: 'simple_entity')]
-    public ?string $simpleEntityId = null;
-
-    #[OneToOne(entity: 'simple_entity', onDelete: OnDelete::CASCADE)]
-    public ?SimpleEntity $simpleEntity = null;
 }

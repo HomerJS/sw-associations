@@ -20,7 +20,7 @@ class Migration1734636575SimpleEntity extends MigrationStep
     public function update(Connection $connection): void
     {
         $query = <<<'SQL'
-            ALTER TABLE `simple_entity` ADD `simple2_entity_id` BINARY(16) DEFAULT NULL;
+            ALTER TABLE `simple_entity` ADD `simple2_entity_id` BINARY(16) DEFAULT NULL UNIQUE ;
             ALTER TABLE `simple_entity` ADD CONSTRAINT `fk.simple_entity.simple2_entity_id` FOREIGN KEY (`simple2_entity_id`) REFERENCES `simple2_entity` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 SQL;
 
