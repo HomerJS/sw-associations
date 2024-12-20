@@ -4,6 +4,7 @@ namespace IhorAss\Command;
 
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -39,13 +40,22 @@ class TestCommand extends Command
 //        $pk = $carNumberList->getPrimaryKeys('car_number');
 //        var_dump($pk);
 
-        $this->carRepo->create([
-            [
-                'id' => Uuid::randomHex(),
-                'name' => 'VW',
-                'carNumberId' => '0193e5874039711da744709516a15c6f'
-            ]
-        ], $context);
+//        $this->carRepo->create([
+//            [
+//                'id' => Uuid::randomHex(),
+//                'name' => 'VW',
+//                'carNumberId' => '0193e5874039711da744709516a15c6f'
+//            ]
+//        ], $context);
+
+        $criteria = new Criteria();
+        $criteria->addAssociation('carNumber');
+        $cars = $this->carRepo->search($criteria, $context)->getElements();
+        foreach ($cars as $car) {
+            var_dump($car->carNumberId);
+            var_dump($car->carNumber);
+        }
+
 
         return Command::SUCCESS;
     }
