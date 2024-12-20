@@ -3,25 +3,25 @@
 namespace IhorAss\Migration;
 
 use Doctrine\DBAL\Connection;
-use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\Framework\Migration\MigrationStep;
 
-/**
- * @internal
- */
-#[Package('core')]
-class Migration1734636575SimpleEntity extends MigrationStep
+class Migration1734721658CarNumber extends MigrationStep
 {
     public function getCreationTimestamp(): int
     {
-        return 1734636575;
+        return 1734721658;
     }
 
     public function update(Connection $connection): void
     {
         $query = <<<'SQL'
-            ALTER TABLE `simple_entity` ADD `simple2_entity_id` BINARY(16) DEFAULT NULL UNIQUE ;
-            ALTER TABLE `simple_entity` ADD CONSTRAINT `fk.simple_entity.simple2_entity_id` FOREIGN KEY (`simple2_entity_id`) REFERENCES `simple2_entity` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+            CREATE TABLE car_number (
+                id BINARY(16) NOT NULL, 
+                car_number VARCHAR(255) NOT NULL, 
+                created_at DATETIME NOT NULL, 
+                updated_at DATETIME DEFAULT NULL, 
+                PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB;
 SQL;
 
         $connection->executeStatement($query);

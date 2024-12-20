@@ -5,26 +5,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="IhorAss\Core\Content\Simple\SimpleEntity">
+        <service id="IhorAss\Core\Content\Car\CarEntity">
             <tag name="shopware.entity" />
         </service>
 
-        <service id="IhorAss\Core\Content\Simple\Aggregate\SimpleTranslation\SimpleTranslationEntity">
-            <tag name="shopware.entity" />
-        </service>
-
-        <service id="IhorAss\Core\Content\Simple2\Simple2Entity">
-            <tag name="shopware.entity" />
-        </service>
-
-        <service id="IhorAss\Core\Content\Simple2\Aggregate\Simple2Translation\Simple2TranslationEntity">
+        <service id="IhorAss\Core\Content\CarNumber\CarNumberEntity">
             <tag name="shopware.entity" />
         </service>
 
         <service id="IhorAss\Command\TestCommand">
             <tag name="console.command" />
-            <argument type="service" id="simple_entity.repository" />
-            <argument type="service" id="simple2_entity.repository" />
+            <argument type="service" id="car.repository" />
+            <argument type="service" id="car_number.repository" />
         </service>
     </services>
 </container>

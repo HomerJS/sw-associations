@@ -14,8 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TestCommand extends Command
 {
     public function __construct(
-        private readonly EntityRepository $sRepository,
-        private readonly EntityRepository $s2Repository,
+        private readonly EntityRepository $carRepo,
+        private readonly EntityRepository $carNumberRepo,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -25,21 +25,25 @@ class TestCommand extends Command
     {
         $context = Context::createCLIContext();
 
-//        $simple2IdList = $this->s2Repository->create([
+//        $carNumberList = $this->carNumberRepo->create([
 //            [
 //                'id' => Uuid::randomHex(),
-//                'simple2Name' => 'some name',
+//                'carNumber' => 'First',
+//            ],
+//            [
+//                'id' => Uuid::randomHex(),
+//                'carNumber' => 'Second',
 //            ]
 //        ], $context);
 //
-//        $pk = $simple2IdList->getPrimaryKeys('simple2_entity');
-//        $simple2Id = $pk[0];
-//var_dump($simple2Id);
-        $this->sRepository->create([
+//        $pk = $carNumberList->getPrimaryKeys('car_number');
+//        var_dump($pk);
+
+        $this->carRepo->create([
             [
                 'id' => Uuid::randomHex(),
-                'simpleName' => 'some2 name',
-                'simple2EntityId' => '0193e08ca08b71c484e8290885464aa9'
+                'name' => 'VW',
+                'carNumberId' => '0193e5874039711da744709516a15c6f'
             ]
         ], $context);
 
