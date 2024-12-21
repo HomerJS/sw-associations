@@ -13,10 +13,15 @@
             <tag name="shopware.entity" />
         </service>
 
+        <service id="IhorAss\Core\Content\CarColor\CarColorEntity">
+            <tag name="shopware.entity" />
+        </service>
+
         <service id="IhorAss\Command\TestCommand">
             <tag name="console.command" />
             <argument type="service" id="car.repository" />
             <argument type="service" id="car_number.repository" />
+            <argument type="service" id="car_color.repository" />
         </service>
     </services>
 </container>

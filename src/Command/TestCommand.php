@@ -17,6 +17,7 @@ class TestCommand extends Command
     public function __construct(
         private readonly EntityRepository $carRepo,
         private readonly EntityRepository $carNumberRepo,
+        private readonly EntityRepository $carColorRepo,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -26,36 +27,35 @@ class TestCommand extends Command
     {
         $context = Context::createCLIContext();
 
-//        $carNumberList = $this->carNumberRepo->create([
-//            [
-//                'id' => Uuid::randomHex(),
-//                'carNumber' => 'First',
-//            ],
-//            [
-//                'id' => Uuid::randomHex(),
-//                'carNumber' => 'Second',
-//            ]
-//        ], $context);
-//
-//        $pk = $carNumberList->getPrimaryKeys('car_number');
-//        var_dump($pk);
-
 //        $this->carRepo->create([
 //            [
 //                'id' => Uuid::randomHex(),
 //                'name' => 'VW',
-//                'carNumberId' => '0193e5874039711da744709516a15c6f'
+//                'carNumber' => [
+//                    'id' => Uuid::randomHex(),
+//                    'carNumber' => 'Second',
+//                ],
+//                'carColor' => [
+//                    'id' => Uuid::randomHex(),
+//                    'carColor' => 'Black',
+//                ]
 //            ]
 //        ], $context);
 
-        $criteria = new Criteria();
-        $criteria->addAssociation('carNumber');
-        $cars = $this->carRepo->search($criteria, $context)->getElements();
-        foreach ($cars as $car) {
-            var_dump($car->carNumberId);
-            var_dump($car->carNumber);
-        }
+//        $criteria = new Criteria();
+//        $criteria->addAssociation('carNumber');
+//        $cars = $this->carRepo->search($criteria, $context)->getElements();
+//        foreach ($cars as $car) {
+//            var_dump($car->carNumberId);
+//            var_dump($car->carNumber);
+//        }
 
+        $criteria = new Criteria();
+        $criteria->addAssociation('cars');
+        $colors = $this->carColorRepo->search($criteria, $context);
+        foreach ($colors as $color) {
+            var_dump($color->cars);
+        }
 
         return Command::SUCCESS;
     }
