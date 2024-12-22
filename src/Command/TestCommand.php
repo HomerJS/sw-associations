@@ -18,6 +18,7 @@ class TestCommand extends Command
         private readonly EntityRepository $carRepo,
         private readonly EntityRepository $carNumberRepo,
         private readonly EntityRepository $carColorRepo,
+        private readonly EntityRepository $driverRepo,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -50,11 +51,51 @@ class TestCommand extends Command
 //            var_dump($car->carNumber);
 //        }
 
+//        $criteria = new Criteria();
+//        $criteria->addAssociation('cars');
+//        $colors = $this->carColorRepo->search($criteria, $context);
+//        foreach ($colors as $color) {
+//            var_dump($color->cars);
+//        }
+
+//        $this->driverRepo->create([
+//            [
+//                'id' => Uuid::randomHex(),
+//                'name' => 'Driver1'
+//            ],
+//            [
+//                'id' => Uuid::randomHex(),
+//                'name' => 'Driver2'
+//            ],
+//            [
+//                'id' => Uuid::randomHex(),
+//                'name' => 'Driver3'
+//            ]
+//        ], $context);
+
+
+//        $carId = $this->carRepo->searchIds(new Criteria(), $context)->firstId();
+//        $driverIds = $this->driverRepo->searchIds(new Criteria(), $context)->getIds();
+//
+//        $payload = [];
+//        foreach ($driverIds as $driverId) {
+//            $payload[] = [
+//                'id' => $driverId,
+//            ];
+//        }
+//
+//        $this->carRepo->update([
+//            [
+//                'id' => $carId,
+//                'drivers' => $payload
+//            ]
+//        ], $context);
+
         $criteria = new Criteria();
-        $criteria->addAssociation('cars');
-        $colors = $this->carColorRepo->search($criteria, $context);
-        foreach ($colors as $color) {
-            var_dump($color->cars);
+        $criteria->addAssociation('drivers');
+        $cars = $this->carRepo->search($criteria, $context);
+        foreach ($cars as $car) {
+            var_dump($car->drivers);
         }
 
         return Command::SUCCESS;
