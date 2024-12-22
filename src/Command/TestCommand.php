@@ -19,6 +19,7 @@ class TestCommand extends Command
         private readonly EntityRepository $carNumberRepo,
         private readonly EntityRepository $carColorRepo,
         private readonly EntityRepository $driverRepo,
+        private readonly EntityRepository $productRepo,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -91,12 +92,23 @@ class TestCommand extends Command
 //            ]
 //        ], $context);
 
-        $criteria = new Criteria();
-        $criteria->addAssociation('drivers');
-        $cars = $this->carRepo->search($criteria, $context);
-        foreach ($cars as $car) {
-            var_dump($car->drivers);
-        }
+//        $criteria = new Criteria();
+//        $criteria->addAssociation('drivers');
+//        $cars = $this->carRepo->search($criteria, $context);
+//        foreach ($cars as $car) {
+//            var_dump($car->drivers);
+//        }
+
+        $id = $this->productRepo->searchIds(new Criteria(), $context)->firstId();
+
+        $this->productRepo->upsert([
+            [
+                'id' => $id,
+                'ProductNumber' => [
+                    'number' => 'some number'
+                ]
+            ]
+        ], $context);
 
         return Command::SUCCESS;
     }

@@ -25,12 +25,21 @@
             <tag name="shopware.entity" />
         </service>
 
+        <service id="IhorAss\Core\Content\ProductNumber\ProductNumberDefinition">
+            <tag name="shopware.entity.definition" entity="product_number" />
+        </service>
+
+        <service id="IhorAss\Extension\Content\Product\ProductNumberExtension">
+            <tag name="shopware.entity.extension" />
+        </service>
+
         <service id="IhorAss\Command\TestCommand">
             <tag name="console.command" />
             <argument type="service" id="car.repository" />
             <argument type="service" id="car_number.repository" />
             <argument type="service" id="car_color.repository" />
             <argument type="service" id="driver.repository" />
+            <argument type="service" id="product.repository" />
         </service>
     </services>
 </container>
