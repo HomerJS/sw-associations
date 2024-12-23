@@ -25,11 +25,21 @@
             <tag name="shopware.entity" />
         </service>
 
+<!--        One-toOne -->
         <service id="IhorAss\Core\Content\ProductNumber\ProductNumberDefinition">
             <tag name="shopware.entity.definition" entity="product_number" />
         </service>
 
         <service id="IhorAss\Extension\Content\Product\ProductNumberExtension">
+            <tag name="shopware.entity.extension" />
+        </service>
+
+<!--        One-To-Many -->
+        <service id="IhorAss\Core\Content\ProductText\ProductTextDefinition">
+            <tag name="shopware.entity.definition" entity="product_text" />
+        </service>
+
+        <service id="IhorAss\Extension\Content\Product\ProductTextExtension">
             <tag name="shopware.entity.extension" />
         </service>
 

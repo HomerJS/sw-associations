@@ -99,16 +99,41 @@ class TestCommand extends Command
 //            var_dump($car->drivers);
 //        }
 
-        $id = $this->productRepo->searchIds(new Criteria(), $context)->firstId();
+        //        One-To-One
+//        $product = $this->productRepo->search(new Criteria(), $context)->first();
+//
+//        $this->productRepo->upsert([
+//            [
+//                'id' => $product->getId(),
+//                'ProductNumber' => [
+//                    'productVersionId' => $product->getVersionId(),
+//                    'number' => 'some number'
+//                ]
+//            ]
+//        ], $context);
 
-        $this->productRepo->upsert([
-            [
-                'id' => $id,
-                'ProductNumber' => [
-                    'number' => 'some number'
-                ]
-            ]
-        ], $context);
+//        One-To-Many
+//        $product = $this->productRepo->search(new Criteria(), $context)->first();
+//
+//        $this->productRepo->upsert([
+//            [
+//                'id' => $product->getId(),
+//                'ProductTexts' => [
+//                    [
+//                        'text' => 'some text'
+//                    ]
+//                ]
+//            ]
+//        ], $context);
+
+        $criteria = new Criteria();
+        $criteria->addAssociation('ProductTexts');
+        $product = $this->productRepo->search($criteria, $context)->first();
+
+        $extensions = $product->getExtension('ProductTexts');
+        foreach ($extensions as $extension) {
+            var_dump($extension->getText());
+        }
 
         return Command::SUCCESS;
     }
