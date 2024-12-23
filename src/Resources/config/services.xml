@@ -43,6 +43,21 @@
             <tag name="shopware.entity.extension" />
         </service>
 
+<!--        MANY-TO-MANY -->
+        <service id="IhorAss\Extension\Content\Product\ProductManufExtension">
+            <tag name="shopware.entity.extension" />
+            <argument type="service" id="manuf.definition" />
+            <argument type="service" id="manuf_product.definition" />
+        </service>
+
+        <service id="IhorAss\Core\Content\Manuf\ManufEntity">
+            <tag name="shopware.entity" />
+        </service>
+
+        <service id="IhorAss\Core\Content\ManufProduct\ManufProductEntity">
+            <tag name="shopware.entity" />
+        </service>
+
         <service id="IhorAss\Command\TestCommand">
             <tag name="console.command" />
             <argument type="service" id="car.repository" />
@@ -50,6 +65,7 @@
             <argument type="service" id="car_color.repository" />
             <argument type="service" id="driver.repository" />
             <argument type="service" id="product.repository" />
+            <argument type="service" id="manuf.repository" />
         </service>
     </services>
 </container>

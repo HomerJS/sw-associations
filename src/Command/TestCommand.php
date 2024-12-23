@@ -20,6 +20,7 @@ class TestCommand extends Command
         private readonly EntityRepository $carColorRepo,
         private readonly EntityRepository $driverRepo,
         private readonly EntityRepository $productRepo,
+        private readonly EntityRepository $manufRepo,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -126,14 +127,48 @@ class TestCommand extends Command
 //            ]
 //        ], $context);
 
-        $criteria = new Criteria();
-        $criteria->addAssociation('ProductTexts');
-        $product = $this->productRepo->search($criteria, $context)->first();
+//        $criteria = new Criteria();
+//        $criteria->addAssociation('ProductTexts');
+//        $product = $this->productRepo->search($criteria, $context)->first();
+//
+//        $extensions = $product->getExtension('ProductTexts');
+//        foreach ($extensions as $extension) {
+//            var_dump($extension->getText());
+//        }
 
-        $extensions = $product->getExtension('ProductTexts');
-        foreach ($extensions as $extension) {
-            var_dump($extension->getText());
+
+//        MANY-TO-MANY
+//        $this->manufRepo->create([
+//            [
+//                'id' => Uuid::randomHex(),
+//                'string' => 'TH'
+//            ],
+//            [
+//                'id' => Uuid::randomHex(),
+//                'string' => 'LV'
+//            ],
+//            [
+//                'id' => Uuid::randomHex(),
+//                'string' => 'GA'
+//            ],
+//        ], $context);
+//
+        $manufId = $this->manufRepo->searchIds(new Criteria(), $context)->firstId();
+        $productIds = $this->productRepo->searchIds(new Criteria(), $context)->getIds();
+
+        $payload = [];
+        foreach ($productIds as $productId) {
+            $payload[] = [
+                'id' => $productId,
+            ];
         }
+
+        $this->manufRepo->update([
+            [
+                'id' => $manufId,
+                'products' => $payload
+            ]
+        ], $context);
 
         return Command::SUCCESS;
     }
