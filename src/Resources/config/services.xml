@@ -44,18 +44,16 @@
         </service>
 
 <!--        MANY-TO-MANY -->
-        <service id="IhorAss\Extension\Content\Product\ProductManufExtension">
-            <tag name="shopware.entity.extension" />
-            <argument type="service" id="manuf.definition" />
-            <argument type="service" id="manuf_product.definition" />
-        </service>
-
         <service id="IhorAss\Core\Content\Manuf\ManufEntity">
             <tag name="shopware.entity" />
         </service>
 
         <service id="IhorAss\Core\Content\ManufProduct\ManufProductEntity">
             <tag name="shopware.entity" />
+        </service>
+
+        <service id="IhorAss\Extension\Content\Product\ProductManufExtension">
+            <tag name="shopware.entity.extension" />
         </service>
 
         <service id="IhorAss\Command\TestCommand">
